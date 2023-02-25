@@ -1,13 +1,12 @@
 # Step 1: Build the app in image 'builder'
 FROM node:12.0.0-alpine AS builder
 
-RUN npm config set registry https://registry.npm.taobao.org
 RUN npm config set unsafe-perm true
 RUN npm install -g @angular/cli
 
 WORKDIR /usr/src/app
 COPY . .
-RUN npm  --registry https://registry.npm.taobao.org  install
+RUN npm install
 RUN npm run build
 
 # Step 2: Use build output from 'builder'
